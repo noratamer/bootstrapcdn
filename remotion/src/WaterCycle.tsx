@@ -11,23 +11,27 @@ import {
 
 const FPS = 30;
 
-// -------------------- PALETTE --------------------
-const SKY_TOP = '#7FD1FF';
-const SKY_BOTTOM = '#CFEEFF';
-const OCEAN_TOP = '#2F8FDB';
-const OCEAN_BOTTOM = '#1B5FA6';
-const HILL_FAR = '#8FC8A3';
-const HILL_MID = '#7AC97A';
-const HILL_NEAR = '#54A85A';
-const GRASS = '#3E8E45';
-const SUN = '#FFD447';
-const SUN_STROKE = '#E6A500';
-const CLOUD = '#FFFFFF';
-const CLOUD_SHADOW = '#D5E5F2';
-const CLOUD_DARK = '#4A5F7A';
-const RAIN = '#4FC3F7';
-const RAIN_STROKE = '#0D3E66';
-const INK = '#0F2A44';
+// -------------------- PASTEL PALETTE --------------------
+const SKY_TOP = '#FFD6E7';
+const SKY_BOTTOM = '#D6ECFF';
+const OCEAN_TOP = '#A8CBE8';
+const OCEAN_BOTTOM = '#7FA6C9';
+const HILL_FAR = '#D4EBD8';
+const HILL_MID = '#B8DFBF';
+const HILL_NEAR = '#9BCFA5';
+const GRASS = '#7EB88A';
+const SUN = '#FFE9A3';
+const SUN_STROKE = '#EFCA7A';
+const CLOUD = '#FFFCFB';
+const CLOUD_SHADOW = '#F1E4EE';
+const CLOUD_DARK = '#B0AAC7';
+const RAIN = '#BEE4F3';
+const RAIN_STROKE = '#7FA8C4';
+const INK = '#5A6480';
+const FLOWER_PINK = '#F7B8D0';
+const FLOWER_YELLOW = '#FFEFA8';
+const CHEEK = '#FFC3D2';
+const HIGHLIGHT_YELLOW = '#FFF3C4';
 
 // hand-drawn wiggle for outlines
 const wiggle = (frame: number, amp = 1.2) => Math.sin(frame / 4) * amp;
@@ -59,20 +63,20 @@ const Defs: React.FC = () => (
       <stop offset="100%" stopColor={SKY_BOTTOM} />
     </linearGradient>
     <linearGradient id="skyGradDark" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stopColor="#4A6B85" />
-      <stop offset="100%" stopColor="#7893A8" />
+      <stop offset="0%" stopColor="#B8B4D6" />
+      <stop offset="100%" stopColor="#D6CFE3" />
     </linearGradient>
     <linearGradient id="oceanGrad" x1="0" x2="0" y1="0" y2="1">
       <stop offset="0%" stopColor={OCEAN_TOP} />
       <stop offset="100%" stopColor={OCEAN_BOTTOM} />
     </linearGradient>
     <linearGradient id="sunGrad" x1="0" x2="0" y1="0" y2="1">
-      <stop offset="0%" stopColor="#FFE58A" />
+      <stop offset="0%" stopColor="#FFF3C4" />
       <stop offset="100%" stopColor={SUN} />
     </linearGradient>
     <radialGradient id="sunGlow" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0%" stopColor="#FFF7C2" stopOpacity="0.7" />
-      <stop offset="100%" stopColor="#FFF7C2" stopOpacity="0" />
+      <stop offset="0%" stopColor="#FFF3E0" stopOpacity="0.55" />
+      <stop offset="100%" stopColor="#FFF3E0" stopOpacity="0" />
     </radialGradient>
     <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
       <feGaussianBlur in="SourceAlpha" stdDeviation="6" />
@@ -103,7 +107,7 @@ const Star: React.FC<{ x: number; y: number; scale?: number; delay?: number }> =
   const pulse = 0.7 + 0.3 * Math.sin((frame + delay) / 6);
   return (
     <g transform={`translate(${x} ${y}) scale(${scale})`} opacity={pulse}>
-      <path d="M 0 -14 L 4 -4 L 14 0 L 4 4 L 0 14 L -4 4 L -14 0 L -4 -4 Z" fill="#FFF9AA" />
+      <path d="M 0 -14 L 4 -4 L 14 0 L 4 4 L 0 14 L -4 4 L -14 0 L -4 -4 Z" fill="#FFF3C4" />
     </g>
   );
 };
@@ -136,8 +140,8 @@ const Sun: React.FC<{ x: number; y: number; scale?: number; happy?: boolean; win
         ))}
       </g>
       <circle r={115} fill="url(#sunGrad)" stroke={SUN_STROKE} strokeWidth={6} />
-      <circle cx={-70} cy={30} r={18} fill="#FF9BB0" opacity={cheeks} />
-      <circle cx={70} cy={30} r={18} fill="#FF9BB0" opacity={cheeks} />
+      <circle cx={-70} cy={30} r={18} fill={CHEEK} opacity={cheeks} />
+      <circle cx={70} cy={30} r={18} fill={CHEEK} opacity={cheeks} />
       {wink ? (
         <path d="M -50 -15 Q -35 -25 -20 -15" stroke={INK} strokeWidth={7} fill="none" strokeLinecap="round" />
       ) : (
@@ -161,9 +165,9 @@ const Sun: React.FC<{ x: number; y: number; scale?: number; happy?: boolean; win
       )}
       <path
         d="M -22 25 Q -15 40 -8 25"
-        stroke="#D62E5E"
+        stroke="#E896A8"
         strokeWidth={4}
-        fill="#D62E5E"
+        fill="#E896A8"
         strokeLinecap="round"
       />
     </g>
@@ -263,8 +267,8 @@ const Droplet: React.FC<{
       ) : (
         <path d="M -6 24 Q 0 20 6 24" stroke={INK} strokeWidth={3} fill="none" strokeLinecap="round" />
       )}
-      <ellipse cx={-16} cy={18} rx={5} ry={3} fill="#FF9BB0" opacity={0.7} />
-      <ellipse cx={16} cy={18} rx={5} ry={3} fill="#FF9BB0" opacity={0.7} />
+      <ellipse cx={-16} cy={18} rx={5} ry={3} fill={CHEEK} opacity={0.75} />
+      <ellipse cx={16} cy={18} rx={5} ry={3} fill={CHEEK} opacity={0.75} />
       {arms ? (
         <>
           <g transform={`translate(-25 5) rotate(${-30 + waveAngle})`}>
@@ -312,18 +316,18 @@ const Ocean: React.FC<{ y: number; withFish?: boolean }> = ({ y, withFish = true
       <rect x={0} y={y} width={1080} height={1920 - y} fill="url(#oceanGrad)" />
       <path
         d={`M 0 ${y} Q 270 ${y - 40 + w1} 540 ${y} T 1080 ${y} L 1080 ${y + 30} L 0 ${y + 30} Z`}
-        fill="#5AA9E6"
-        opacity={0.7}
+        fill="#C7DFF0"
+        opacity={0.8}
       />
       <path
         d={`M 0 ${y + 30} Q 270 ${y + w2} 540 ${y + 30} T 1080 ${y + 30} L 1080 ${y + 70} L 0 ${y + 70} Z`}
-        fill="#3A88C4"
-        opacity={0.6}
+        fill="#9BC0DC"
+        opacity={0.7}
       />
       <path
         d={`M 0 ${y + 65} Q 270 ${y + 35 + w3} 540 ${y + 65} T 1080 ${y + 65} L 1080 ${y + 110} L 0 ${y + 110} Z`}
-        fill="#2570A8"
-        opacity={0.6}
+        fill="#88ACC6"
+        opacity={0.7}
       />
       {[
         { x: 150, py: 45 },
@@ -338,9 +342,9 @@ const Ocean: React.FC<{ y: number; withFish?: boolean }> = ({ y, withFish = true
       ))}
       {withFish
         ? [
-            { x0: -60, y: y + 220, phase: 0, flip: 1, color: '#FF7043' },
-            { x0: 1140, y: y + 380, phase: 40, flip: -1, color: '#FFD54F' },
-            { x0: -60, y: y + 320, phase: 80, flip: 1, color: '#E040FB' },
+            { x0: -60, y: y + 220, phase: 0, flip: 1, color: '#FFB59A' },
+            { x0: 1140, y: y + 380, phase: 40, flip: -1, color: '#FFE7A8' },
+            { x0: -60, y: y + 320, phase: 80, flip: 1, color: '#D9B8E8' },
           ].map((f, i) => {
             const t = ((frame + f.phase) % 200) / 200;
             const x = f.flip === 1 ? -60 + t * 1200 : 1140 - t * 1200;
@@ -391,14 +395,14 @@ const Hills: React.FC<{ withFlowers?: boolean }> = ({ withFlowers = true }) => {
           <g key={i} transform={`translate(${tx} 1480) rotate(${swayA})`}>
             <path
               d="M 0 0 Q -6 -30 -3 -70"
-              stroke="#5A3A1A"
+              stroke="#B08A6A"
               strokeWidth={6}
               fill="none"
               strokeLinecap="round"
             />
-            <circle cx={-3} cy={-80} r={38} fill="#2E8B57" stroke="#215E3D" strokeWidth={4} />
-            <circle cx={-18} cy={-95} r={22} fill="#3EA36A" stroke="#215E3D" strokeWidth={3} />
-            <circle cx={12} cy={-95} r={22} fill="#3EA36A" stroke="#215E3D" strokeWidth={3} />
+            <circle cx={-3} cy={-80} r={38} fill="#A8D8B0" stroke="#7EB88A" strokeWidth={4} />
+            <circle cx={-18} cy={-95} r={22} fill="#B8E0BF" stroke="#7EB88A" strokeWidth={3} />
+            <circle cx={12} cy={-95} r={22} fill="#B8E0BF" stroke="#7EB88A" strokeWidth={3} />
           </g>
         );
       })}
@@ -408,7 +412,7 @@ const Hills: React.FC<{ withFlowers?: boolean }> = ({ withFlowers = true }) => {
             return (
               <g key={i} transform={`translate(${fx + sway} 1520)`}>
                 <line x1={0} y1={0} x2={0} y2={-30} stroke={GRASS} strokeWidth={4} />
-                <circle cx={0} cy={-30} r={8} fill={i % 2 ? '#FF6B9E' : '#FFEB3B'} stroke={INK} strokeWidth={2} />
+                <circle cx={0} cy={-30} r={8} fill={i % 2 ? FLOWER_PINK : FLOWER_YELLOW} stroke={INK} strokeWidth={2} />
                 <circle cx={0} cy={-30} r={3} fill={INK} />
               </g>
             );
@@ -456,7 +460,7 @@ const Label: React.FC<{
   startFrame: number;
   color?: string;
   bg?: string;
-}> = ({ text, y, frame, startFrame, color = '#0F3B66', bg = '#FFF' }) => {
+}> = ({ text, y, frame, startFrame, color = INK, bg = '#FFFCFB' }) => {
   const local = frame - startFrame;
   const scale = spring({ frame: local, fps: FPS, config: { damping: 8, stiffness: 120 } });
   const opacity = interpolate(local, [0, 8], [0, 1], { extrapolateRight: 'clamp' });
@@ -545,13 +549,13 @@ const TitleScene: React.FC<{ len: number }> = ({ len }) => {
           fontFamily="'Comic Sans MS', sans-serif"
           fontWeight={900}
           fontSize={140}
-          fill="#1E88E5"
+          fill="#8FB7DA"
         >
           Cycle!
         </text>
       </g>
       <g transform={`translate(540 ${subY}) scale(${subScale})`}>
-        <rect x={-440} y={-50} width={880} height={100} rx={30} fill="#FFEB3B" stroke={INK} strokeWidth={6} />
+        <rect x={-440} y={-50} width={880} height={100} rx={30} fill={HIGHLIGHT_YELLOW} stroke={INK} strokeWidth={6} />
         <text
           x={0}
           y={22}
@@ -630,7 +634,7 @@ const EvaporationScene: React.FC<{ len: number }> = ({ len }) => {
         strokeDasharray="24 18"
         opacity={interpolate(frame, [30, 50], [0, 0.85], { extrapolateRight: 'clamp' })}
       />
-      <Label text="EVAPORATION" y={220} frame={frame} startFrame={8} color="#E67E22" />
+      <Label text="EVAPORATION" y={220} frame={frame} startFrame={8} color="#E8A578" />
       <g
         transform="translate(540 1720)"
         opacity={interpolate(frame, [45, 70], [0, 1], { extrapolateRight: 'clamp' })}
@@ -686,7 +690,7 @@ const CondensationScene: React.FC<{ len: number }> = ({ len }) => {
         const scale = interpolate(t, [0, 1], [0.55, 0.35]);
         return <Droplet key={i} x={x} y={y} scale={scale} opacity={opacity} arms wave bounce />;
       })}
-      <Label text="CONDENSATION" y={280} frame={frame} startFrame={8} color="#8E44AD" />
+      <Label text="CONDENSATION" y={280} frame={frame} startFrame={8} color="#B58ACB" />
       <g
         transform="translate(540 1720)"
         opacity={interpolate(frame, [45, 70], [0, 1], { extrapolateRight: 'clamp' })}
@@ -748,14 +752,14 @@ const PrecipitationScene: React.FC<{ len: number }> = ({ len }) => {
         const op = interpolate(cycle, [0, 5, 30], [0, 0.7, 0], { extrapolateRight: 'clamp' });
         return <circle key={i} cx={x} cy={y} r={r} fill="none" stroke="#FFF" strokeWidth={3} opacity={op} />;
       })}
-      <Label text="PRECIPITATION" y={270} frame={frame} startFrame={8} color="#2C3E50" />
+      <Label text="PRECIPITATION" y={270} frame={frame} startFrame={8} color="#7A8AA6" />
       {[220, 540, 860].map((x, i) => {
         const bolt = Math.floor(frame / 22) % 3 === i;
         return bolt ? (
           <path
             key={i}
             d={`M ${x - 20} 780 L ${x + 10} 820 L ${x - 10} 850 L ${x + 20} 900`}
-            stroke="#FFEB3B"
+            stroke={HIGHLIGHT_YELLOW}
             strokeWidth={10}
             fill="none"
             strokeLinecap="round"
@@ -824,7 +828,7 @@ const CollectionScene: React.FC<{ len: number }> = ({ len }) => {
         const opacity = interpolate(t, [0, 0.1, 0.85, 1], [0, 1, 1, 0]);
         return <Droplet key={i} x={x} y={y} scale={0.4} opacity={opacity} arms wave bounce />;
       })}
-      <Label text="COLLECTION" y={290} frame={frame} startFrame={8} color="#1976D2" />
+      <Label text="COLLECTION" y={290} frame={frame} startFrame={8} color="#8FB7DA" />
       <g
         transform="translate(540 1750)"
         opacity={interpolate(frame, [40, 65], [0, 1], { extrapolateRight: 'clamp' })}
@@ -894,7 +898,7 @@ const CycleFinaleScene: React.FC<{ len: number }> = ({ len }) => {
           fontFamily="'Comic Sans MS', sans-serif"
           fontWeight={900}
           fontSize={120}
-          fill="#FFEB3B"
+          fill={HIGHLIGHT_YELLOW}
           stroke={INK}
           strokeWidth={7}
         >
